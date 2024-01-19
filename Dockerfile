@@ -4,6 +4,7 @@
 FROM openjdk:11 AS build
 COPY . .
 RUN ./gradlew clean bootJar
+RUN ls -l /build-workspace/build/libs/
 
 #
 # Package stage
