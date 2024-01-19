@@ -1,16 +1,19 @@
 #
 # Build stage
 #
-FROM openjdk:11 AS build
-COPY . .
-RUN ./gradlew clean bootJar
-RUN ls -l /build-workspace/build/libs/
+FROM gradle:jdk8 as build
+
+COPY --chown:gradle:gradle . /home/gradle/src
+
+WROKDIR /home/gradle/src/
+
+RUN gradle clean build --parallel
 
 #
 # Package stage
 #
 FROM openjdk:11
-ADD build/libs/GreenBean*.jar GreenBean.jar
+COPY --from=build /home/gradle/src/build/libs/GreenBean.jar GreenBean.jar
 EXPOSE 8083
 ENTRYPOINT ["java", "-jar", "GreenBean.jar","-Dspring.profiles.active=prod"]
 
