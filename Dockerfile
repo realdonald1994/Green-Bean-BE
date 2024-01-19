@@ -1,9 +1,9 @@
 #
 # Build stage
 #
-FROM gradle:jdk8 as build
+FROM gradle:jdk11 as build
 
-COPY --chown:gradle:gradle . /home/gradle/src
+COPY . .
 
 WROKDIR /home/gradle/src/
 
