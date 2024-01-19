@@ -1,16 +1,10 @@
 #
-# Build stage
-#
-FROM maven:3.8.2-jdk-11 AS build
-COPY . .
-RUN mvn clean package -Pprod -DskipTests
-
-#
 # Package stage
 #
-FROM openjdk:14
-VOLUME /tmp
+FROM openjdk:11
+WORKDIR /my-project
+CMD ["./gradlew", "clean", "bootJar"]
 COPY build/libs/*.jar app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
-EXPOSE 8989
+EXPOSE 8083
+ENTRYPOINT ["java", "-jar", "GreenBean.jar","-Dspring.profiles.active=prod"]
 
