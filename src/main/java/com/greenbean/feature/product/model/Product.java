@@ -1,6 +1,7 @@
 package com.greenbean.feature.product.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Donald Huang
@@ -9,9 +10,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="product")
-public class Product {
+public class Product implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id",nullable = false, updatable = false)
     private Long id;
 
