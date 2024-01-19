@@ -1,18 +1,17 @@
 #
 # Build stage
 #
-FROM gradle:jdk11 as build
+FROM ubuntu:latest as build
 
 COPY . .
 
-CMD ["./gradlew", "clean", "bootJar"]
+RUN ./gradlew bootJar --no-daemon
 
 #
 # Package stage
 #
 FROM openjdk:11
-VOLUME /tmp
-COPY build/libs/GreenBean.jar GreenBean.jar
+COPY --form=build /build/libs/GreenBean.jar GreenBean.jar
 EXPOSE 8989
 ENTRYPOINT ["java", "-jar", "GreenBean.jar","-Dspring.profiles.active=prod"]
 
