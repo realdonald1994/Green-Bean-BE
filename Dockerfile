@@ -11,7 +11,8 @@ CMD ["./gradlew", "clean", "bootJar"]
 # Package stage
 #
 FROM openjdk:11
-COPY --from=build /build/libs/GreenBean.jar GreenBean.jar
+VOLUME /tmp
+COPY build/libs/GreenBean.jar GreenBean.jar
 EXPOSE 8989
 ENTRYPOINT ["java", "-jar", "GreenBean.jar","-Dspring.profiles.active=prod"]
 
