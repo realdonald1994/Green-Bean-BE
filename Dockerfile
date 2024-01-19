@@ -5,9 +5,9 @@ FROM gradle:jdk11 as build
 
 COPY . .
 
-WROKDIR /home/gradle/src/
+WORKDIR /home/gradle/src
 
-RUN gradle clean build --parallel
+RUN gradle clean build
 
 #
 # Package stage
