@@ -16,5 +16,5 @@ RUN ./gradlew bootJar --no-daemon
 FROM openjdk:11
 COPY --from=build /build/libs/GreenBean.jar GreenBean.jar
 EXPOSE 8989
-ENTRYPOINT ["java", "-jar", "GreenBean.jar","-Dspring.profiles.active=prod"]
+ENTRYPOINT ["java", "-jar", "GreenBean.jar","--spring.profiles.active=prod"]
 
