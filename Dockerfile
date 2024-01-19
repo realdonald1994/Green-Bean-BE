@@ -7,7 +7,7 @@ COPY . .
 
 WORKDIR /home/gradle/src
 
-RUN gradle clean build
+RUN ./gradlew bootJar
 
 #
 # Package stage
